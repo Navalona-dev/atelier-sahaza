@@ -1,0 +1,208 @@
+:root {
+    /*--bg-color: #87CEEB;*/
+    --bg-color: #4682B4;
+    --text-color-black: #222831;
+    --text-colo-primary: #4682B4;
+    --bg-color-white: #ffffff;
+  }
+
+  .text-black {
+    color: var(--text-color-black) !important;
+  }
+
+  .text-primary {
+    color: var(--text-colo-primary) !important;
+  }
+
+  .btn-primary {
+    background-color: var(--bg-color) !important;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--bg-color-white);
+    border: 1px solid var(--bg-color);
+
+  }
+
+  .btn-outline-primary {
+    border: 1px solid var(--bg-color);
+    color: var(--text-colo-primary);
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--bg-color);
+    border: none;
+  }
+
+  .btn-md {
+    border-radius: 30px;
+  }
+
+  /*---------------------------------
+  #HEADER
+  ----------------------------------*/
+
+  .navbar {
+    height: 13vh;
+  }
+
+  .navbar .nav-link:hover, .navbar .nav-link.active {
+    color: var(--text-colo-primary);
+    border-bottom: 1px solid var(--bg-color);
+  }
+
+  /*----------------------------------
+  #SECTION HOME
+  ------------------------------------*/
+
+  #home {
+    background-color: var(--bg-color);
+    padding-bottom: 60px;
+    
+  }
+
+  #home .btn-outline-light:hover {
+    border-color: #fff !important;
+    color: var(--text-color) !important;
+  }
+
+  #home .text-light {
+    color: var(--bg-color) !important;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--bg-color-white);
+    border: 1px solid var(--bg-color); 
+    font-weight: bold;
+    font-size: 70px;
+}
+
+
+  .btn-play {
+    position: relative;
+    display: block;
+    box-sizing: content-box;
+    width: 16px;
+    height: 26px;
+    border-radius: 100%;
+    border: none;
+    outline: none !important;
+    padding: 18px 20px 20px 28px;
+    margin-right: 10px;
+  }
+  
+  .btn-play:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border-radius: 100%;
+    animation: pulse-border 1500ms ease-out infinite;
+  }
+  
+  .btn-play:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border-radius: 100%;
+    transition: all 200ms;
+  }
+  
+  .btn-play span {
+    display: block;
+    position: relative;
+    z-index: 3;
+    width: 0;
+    height: 0;
+    left: -1px;
+    border-left: 16px solid var(--bg-color);
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+  }
+
+  @keyframes pulse-border {
+    0% {
+      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(2);
+      opacity: 0;
+    }
+  }
+
+  #home .btn-lg {
+    border-radius: 40px;
+    margin-right: 50px;
+  }
+
+  .home-img {
+    width: 300px; 
+    height: 300px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative; 
+}
+
+.home-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+}
+
+
+
+  /*--------------------------------
+  #SECTION ABOUT
+  ---------------------------------*/
+
+  .text-stroke-about {
+    -webkit-text-stroke: 1px #dee2e6;
+    font-weight: bold;
+    font-size: 100px;
+  }
+
+  #about .short-description, #about .long-description {
+    text-align: justify;
+    line-height: 2;
+  }
+
+.about-content {
+    margin-left: 10px;
+}
+
+.about-content h3 {
+    font-weight: bold;
+}
+
+/*--------------------------
+#SECTION QUALITY
+------------------------------*/
+
+.quality {
+    background-color: var(--bg-color);
+}
+
+.test-stroke-quality {
+    -webkit-text-stroke: 1px #dee2e6;
+    font-weight: bold;
+    font-size: 120px;
+}

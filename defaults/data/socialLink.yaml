@@ -1,0 +1,24 @@
+facebook:
+  name: Facebook
+  link: https://facebook.sahaza.com
+  icon: fab fa-facebook
+
+whatsapp:
+  name: Whatsapp
+  link: https://whatsapp.sahaza.com
+  icon: fab fa-whatsapp
+
+youtube:
+  name: Youtube
+  link: https://youtube.sahaza.com
+  icon: fab fa-youtube
+
+linkedin:
+  name: Linkedin
+  link: https://linkedin.sahaza.com
+  icon: fab fa-linkedin
+
+twitter:
+  name: Twitter
+  link: https://twitter.sahaza.com
+  icon: fab fa-twitter
