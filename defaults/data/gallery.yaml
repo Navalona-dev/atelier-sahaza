@@ -1,0 +1,17 @@
+gallerie1:
+  image: 'portfolio-1.jpg'
+
+gallerie2:
+  image: 'portfolio-2.jpg'
+
+gallerie3:
+  image: 'portfolio-3.jpg'
+
+gallerie4:
+  image: 'portfolio-4.jpg'
+
+gallerie5:
+  image: 'portfolio-5.jpg'
+
+gallerie6:
+  image: 'portfolio-6.jpg'

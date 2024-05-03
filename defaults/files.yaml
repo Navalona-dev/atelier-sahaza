@@ -1,0 +1,7 @@
+public/uploads/galleries:
+  portfolio-1.jpg: public/assets/images/portfolio-1.jpg
+  portfolio-2.jpg: public/assets/images/portfolio-2.jpg
+  portfolio-3.jpg: public/assets/images/portfolio-3.jpg
+  portfolio-4.jpg: public/assets/images/portfolio-4.jpg
+  portfolio-5.jpg: public/assets/images/portfolio-5.jpg
+  portfolio-6.jpg: public/assets/images/portfolio-6.jpg

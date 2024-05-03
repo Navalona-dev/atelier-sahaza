@@ -4,6 +4,8 @@ namespace App\Service;
 
 use DateTime;
 use App\Entity\Contact;
+use App\Entity\Gallery;
+use App\Entity\Quality;
 use App\Entity\HomePage;
 use App\Entity\SocialLink;
 use App\Entity\HomePageBlock;
@@ -41,6 +43,8 @@ class DefaultsLoader
         $this->contacts();
         $this->socialLinks();
         $this->homePages();
+        $this->qualites();
+        $this->galleries();
         
     }
 
@@ -71,8 +75,8 @@ class DefaultsLoader
         $socialLinks = Yaml::parseFile('defaults/data/socialLink.yaml');
 
         foreach ($socialLinks as $name => $content) {
-            list($isNewContact, $socialLink) = $this->maybeCreate(SocialLink::class, ['name' => $name]);
-            if($isNewContact){
+            list($isNewSocialLink, $socialLink) = $this->maybeCreate(SocialLink::class, ['name' => $name]);
+            if($isNewSocialLink){
                 $date = new \DateTime();
                 $socialLink->setName($content['name']);
                 $socialLink->setLink($content['link']);
@@ -122,6 +126,46 @@ class DefaultsLoader
                 
             }
         
+        }
+    }
+
+    public function qualites() {
+        $qualites = Yaml::parseFile('defaults/data/quality.yaml');
+
+        foreach ($qualites as $label => $content) {
+            list($isNewQuality, $quality) = $this->maybeCreate(Quality::class, ['label' => $label]);
+            if($isNewQuality){
+                $date = new \DateTime();
+                $quality->setLabel($label);
+                $quality->setTitle($content['title']);
+                $quality->setDescription($content['description']);
+                $quality->setIcon($content['icon']);
+                $quality->setIsActive(true);
+                $quality->setCreatedAt($date);
+                $this->em->persist($quality);
+                $this->em->flush();
+
+            }
+            
+        }
+    }
+
+    public function galleries() {
+        $galleries = Yaml::parseFile('defaults/data/gallery.yaml');
+
+        foreach ($galleries as $label => $content) {
+            list($isNewGallery, $gallery) = $this->maybeCreate(Gallery::class, ['label' => $label]);
+            if($isNewGallery){
+                $date = new \DateTime();
+                $gallery->setLabel($label);
+                $gallery->setImage($content['image']);
+                $gallery->setIsActive(true);
+                $gallery->setCreatedAt($date);
+                $this->em->persist($gallery);
+                $this->em->flush();
+
+            }
+            
         }
     }
 

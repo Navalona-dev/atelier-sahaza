@@ -1,0 +1,39 @@
+quality1:
+  title: Portefeuille de Projets
+  description: "Découvrez nos réalisations : des structures métalliques impressionnantes et des ouvrages d'art uniques."
+  icon: fas fa-project-diagram
+
+quality2:
+  title: Expertise Métallurgique
+  description: Notre savoir-faire technique garantit des ouvrages métalliques de qualité supérieure, conçus pour durer.
+  icon: fas fa-tools
+
+quality3:
+  title: Innovation et Design
+  description: Explorez nos concepts novateurs et designs avant-gardistes pour des ouvrages métalliques qui repoussent les limites.
+  icon: fas fa-lightbulb
+
+quality4:
+  title: Engagement Environnemental
+  description: Nous privilégions des matériaux durables et des processus de fabrication respectueux de l'environnement.
+  icon: fas fa-leaf
+
+quality5:
+  title: Sécurité et Fiabilité
+  description: "La sécurité est notre priorité : des normes strictes et des tests rigoureux pour des ouvrages métalliques fiables à toute épreuve."
+  icon: fas fa-shield-alt
+
+quality6:
+  title: Collaboration Client
+  description: Nous travaillons en étroite collaboration avec nos clients pour concrétiser leurs idées et atteindre leurs objectifs.
+  icon: fas fa-handshake
+
+quality7:
+  title: Processus de Fabrication
+  description: Découvrez notre processus de fabrication sophistiqué, alliant artisanat traditionnel et technologies de pointe.
+  icon: fas fa-industry
+
+quality8:
+  title: Garantie Qualité
+  description: Notre engagement envers la qualité se reflète dans chaque détail de nos ouvrages métalliques, soutenu par une garantie solide.
+  icon: fas fa-check-circle

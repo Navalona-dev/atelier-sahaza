@@ -49,3 +49,26 @@ $(document).ready(function() {
 
     });
 })
+
+//skills
+
+$(document).ready(function() {
+    $('.skill').waypoint(function () {
+        $('.progress .progress-bar').each(function () {
+            $(this).css("width", $(this).attr("aria-valuenow") + '%');
+        });
+    }, {offset: '80%'});
+});
+
+//testimonial
+
+$(document).ready(function() {
+    $(".testimonial-carousel").owlCarousel({
+        autoplay: true,
+        smartSpeed: 1500,
+        dots: true,
+        loop: true,
+        items: 1
+    });
+})
+
