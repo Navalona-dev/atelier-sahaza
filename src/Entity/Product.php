@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\GalleryRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GalleryRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Gallery
+class Product
 {
     /**
      * @ORM\Id
@@ -23,11 +23,6 @@ class Gallery
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $label;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -36,6 +31,11 @@ class Gallery
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $label;
 
     public function getId(): ?int
     {
@@ -50,18 +50,6 @@ class Gallery
     public function setImage(string $image): self
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getLabel(): ?string
-    {
-        return $this->label;
-    }
-
-    public function setLabel(?string $label): self
-    {
-        $this->label = $label;
 
         return $this;
     }
@@ -86,6 +74,18 @@ class Gallery
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->label = $label;
 
         return $this;
     }

@@ -186,12 +186,12 @@
                 <h1 class="position-absolute text-uppercase text-primary title">Notre gallerie</h1>
             </div>
             <div class="row gallerie-container">
-                {% for gallerie in galleries %}
+                {% for produit in produits %}
                 <div class="col-lg-4 col-md-6 mb-4 gallerie-item first">
                     <div class="position-relative overflow-hidden mb-2">
-                        <img class="img-fluid rounded w-100" src="{{ asset('uploads/galleries/' ~ gallerie.image) }}" alt="">
+                        <img class="img-fluid rounded w-100" src="{{ asset('uploads/products/' ~ produit.image) }}" alt="">
                         <div class="gallerie-btn bg-primary d-flex align-items-center justify-content-center">
-                            <a href="{{ asset('uploads/galleries/' ~ gallerie.image) }}" data-lightbox="gallery">
+                            <a href="{{ asset('uploads/products/' ~ produit.image) }}" data-lightbox="gallery">
                                 <i class="fa fa-plus text-white" style="font-size: 60px;"></i>
                             </a>
                         </div>
@@ -253,10 +253,9 @@
 <div class="container-fluid bg-primary text-white mt-5 py-5 px-sm-3 px-md-5 footer" id="footer">
     <div class="container text-center py-5">
         <div class="d-flex justify-content-center mb-4">
-            <a class="btn btn-light btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-light btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-light btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a class="btn btn-light btn-social" href="#"><i class="fab fa-instagram"></i></a>
+            {% for socialLink in socialLinks %}
+                <a class="btn btn-light btn-social mr-2" href="{{socialLink.link}}"><i class="{{socialLink.icon}}"></i></a>
+            {% endfor %}
         </div>
         <div class="d-flex justify-content-center mb-3">
             <a class="text-white text-decoration-none" href="#">Privacy</a>

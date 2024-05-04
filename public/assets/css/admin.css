@@ -1,0 +1,29 @@
+:root {
+    /*--bg-color: #87CEEB;*/
+    --bg-color: #4682B4;
+    --bg-color-clair: #86beeb;
+    --text-color-black: #222831;
+    --text-colo-primary: #4682B4;
+    --bg-color-white: #ffffff;
+  }
+
+.header {
+    background-color: var(--bg-color-clair);
+    margin-right: -0.7rem;
+    padding-right: 20px;
+    z-index: 1;
+}
+
+.sidebar {
+    position: relative;
+    background-color: var(--bg-color);
+    height: 100vh;
+    margin-left: -12px;
+    width: 230px;
+    z-index: 2;
+}
+
+.content {
+    margin-top: 50px;
+    margin-left: 50px;
+}

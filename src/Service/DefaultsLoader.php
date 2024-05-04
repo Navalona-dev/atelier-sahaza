@@ -5,6 +5,7 @@ namespace App\Service;
 use DateTime;
 use App\Entity\Contact;
 use App\Entity\Gallery;
+use App\Entity\Product;
 use App\Entity\Quality;
 use App\Entity\HomePage;
 use App\Entity\SocialLink;
@@ -44,7 +45,7 @@ class DefaultsLoader
         $this->socialLinks();
         $this->homePages();
         $this->qualites();
-        $this->galleries();
+        $this->produits();
         
     }
 
@@ -150,18 +151,18 @@ class DefaultsLoader
         }
     }
 
-    public function galleries() {
-        $galleries = Yaml::parseFile('defaults/data/gallery.yaml');
+    public function produits() {
+        $produits = Yaml::parseFile('defaults/data/produit.yaml');
 
-        foreach ($galleries as $label => $content) {
-            list($isNewGallery, $gallery) = $this->maybeCreate(Gallery::class, ['label' => $label]);
-            if($isNewGallery){
+        foreach ($produits as $label => $content) {
+            list($isNewProduit, $produit) = $this->maybeCreate(Product::class, ['label' => $label]);
+            if($isNewProduit){
                 $date = new \DateTime();
-                $gallery->setLabel($label);
-                $gallery->setImage($content['image']);
-                $gallery->setIsActive(true);
-                $gallery->setCreatedAt($date);
-                $this->em->persist($gallery);
+                $produit->setLabel($label);
+                $produit->setImage($content['image']);
+                $produit->setIsActive(true);
+                $produit->setCreatedAt($date);
+                $this->em->persist($produit);
                 $this->em->flush();
 
             }

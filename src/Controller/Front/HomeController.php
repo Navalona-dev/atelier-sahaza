@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Repository\ContactRepository;
 use App\Repository\GalleryRepository;
+use App\Repository\ProductRepository;
 use App\Repository\QualityRepository;
 use App\Repository\HomePageRepository;
 use App\Repository\SocialLinkRepository;
@@ -17,21 +18,21 @@ class HomeController extends AbstractController
     private $contactRepository;
     private $homePageRepository;
     private $qualityRepository;
-    private $galleryRepository;
+    private $productRepository;
 
     public function __construct(
         SocialLinkRepository $socialLinkRepository,
         ContactRepository $contactRepository,
         HomePageRepository $homePageRepository,
         QualityRepository $qualityRepository,
-        GalleryRepository $galleryRepository
+        ProductRepository $productRepository
     )
     {
         $this->socialLinkRepository = $socialLinkRepository;
         $this->contactRepository = $contactRepository;
         $this->homePageRepository = $homePageRepository;
         $this->qualityRepository = $qualityRepository;
-        $this->galleryRepository = $galleryRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -42,7 +43,7 @@ class HomeController extends AbstractController
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
         $contact = $this->contactRepository->findOneBy(['isActive' => true]);
         $qualities = $this->qualityRepository->findBy(['isActive' => true]);
-        $galleries = $this->galleryRepository->findBy(['isActive' => true]);
+        $produits = $this->productRepository->findBy(['isActive' => true]);
 
         $homePages = $this->homePageRepository->findAll();
 
@@ -51,7 +52,7 @@ class HomeController extends AbstractController
             'socialLinks' => $socialLinks,
             'homePages' => $homePages,
             'qualites' => $qualities,
-            'galleries' => $galleries
+            'produits' => $produits
         ]);
     }
 }
