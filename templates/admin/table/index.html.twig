@@ -1,0 +1,17 @@
+<div class="content-liste" id="content-liste">
+    <h1> Liste {{menu}} </h1>
+    <table class="table table-striped">
+        <thead>
+            {% include 'admin/table/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
+        </thead>
+        <tbody>
+            {% for liste in listes %}
+                {% include 'admin/table/_table.html.twig' with { 'type': 'tbody', 'menu': menu, 'liste': liste } %}
+            {% else %}
+                <tr>
+                    <td>Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

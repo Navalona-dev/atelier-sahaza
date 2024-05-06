@@ -32,9 +32,10 @@
                     <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12">
                         {% include 'admin/partials/header.html.twig' %}
 
-                        <div class="content">
-                            {% block body %}{% endblock %}
-
+                        <div class="content" id="content">
+                            <div class="container">
+                                {% block body %}{% endblock %}
+                            </div>
                         </div>
                         
                     </div>
@@ -48,5 +49,6 @@
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('plugins/datatable/datatable.min.js')}}"></script>
         <script src="{{ asset('assets/js/admin.js')}}"></script>
+        <script src="{{ asset('assets/js/menu_left.js')}}"></script>
     </body>
 </html>

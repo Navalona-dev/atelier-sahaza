@@ -1,0 +1,67 @@
+{% if menu == "contact" %}
+    {% if type == "thead" %}    
+        <tr id="thead_{{menu}}">
+            <th>Identification</th>
+            <th>Nom</th>
+            <th>Adresse e-mail</th>
+            <th>Contact</th>
+            <th>Adresse</th>
+            <th>Date de création</th>
+            <th>Est-il activé</th>
+            <th>Actions</th>
+        </tr>
+
+    {% elseif type == "tbody" %}
+        <tr id="tbody_{{menu}}">
+            <td> {{liste.id}} </td>
+            <td> {{liste.name}} </td>
+            <td> {{liste.email}} </td>
+            <td> {{liste.contact}} </td>
+            <td> {{liste.adresse}} </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            {% set isActiveText = '' %}
+            {% if liste.isActive == 0 %}
+                {% set isActiveText = "Non" %}
+            {% else %}
+                {% set isActiveText = "Oui" %}
+            {% endif %}
+            <td> {{isActiveText}} </td>
+            <td>
+                <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                <a href="#" class="btn btn-primary btn-sm">Modifier</a>
+            </td>
+        </tr>
+    {% endif %}
+   
+{%  elseif menu == "social" %}
+    {% if type == "thead" %}
+        <tr>
+            <th>Identification</th>
+            <th>Nom</th>
+            <th>Lien</th>
+            <th>Icône</th>
+            <th>Est-il activé?</th>
+            <th>Date de création</th>
+            <th>Actions</th>
+        </tr>
+    {% elseif type == "tbody" %}
+        <tr>
+            <td> {{liste.id}} </td>
+            <td> {{liste.name}} </td>
+            <td> {{liste.link}} </td>
+            <td> {{liste.icon}} </td>
+            {% set isActiveText = '' %}
+            {% if liste.isActive == 0 %}
+                {% set isActiveText = "Non" %}
+            {% else %}
+                {% set isActiveText = "Oui" %}
+            {% endif %}
+            <td> {{isActiveText}} </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            <td>
+                <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                <a href="#" class="btn btn-primary btn-sm">Modifier</a>
+            </td>
+        </tr>
+    {% endif %}
+{% endif %}

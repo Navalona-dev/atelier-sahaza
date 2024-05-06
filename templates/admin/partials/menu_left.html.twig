@@ -1,26 +1,32 @@
+<style>
+    .nav-link {
+        cursor: pointer;
+    }
+</style>
+
 <nav class="d-none d-md-block sidebar">
     <h4 class="pt-4 pb-2 px-2 text-white">Atelier Sahaza</h2>
     <hr class="text-white">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-white active" href="{{path('app_admin_dashboard')}}">
+                <a class="nav-link text-white active" data-menu="dashboard">
                     <i class="fas fa-chart-bar mx-2"></i> Tableau de bord
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" data-menu="contact">
                     <i class="fas fa-phone mx-2"></i> Contact
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" data-menu="product">
                     <i class="fas fa-shopping-cart mx-2"></i> Produits
                 </a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" data-menu="social">
                     <i class="fab fa-facebook mx-2"></i> Réseaux Sociaux
                 </a>
             </li>
