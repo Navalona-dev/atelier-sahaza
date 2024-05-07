@@ -1,35 +1,84 @@
-<style>
-    .nav-link {
-        cursor: pointer;
-    }
-</style>
+<aside id="sidebar" class="sidebar">
 
-<nav class="d-none d-md-block sidebar">
-    <h4 class="pt-4 pb-2 px-2 text-white">Atelier Sahaza</h2>
-    <hr class="text-white">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-white active" data-menu="dashboard">
-                    <i class="fas fa-chart-bar mx-2"></i> Tableau de bord
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" data-menu="contact">
-                    <i class="fas fa-phone mx-2"></i> Contact
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" data-menu="product">
-                    <i class="fas fa-shopping-cart mx-2"></i> Produits
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link text-white" data-menu="social">
-                    <i class="fab fa-facebook mx-2"></i> Réseaux Sociaux
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{{path('app_admin')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-menu="contact">
+          <i class="bi bi-person"></i>
+          <span>Liste contact</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-menu="produit">
+          <i class="bi bi-person"></i>
+          <span>Produit</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-menu="social">
+          <i class="bi bi-person"></i>
+          <span>Reseau sociaux</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-faq.html">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-contact.html">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-register.html">
+          <i class="bi bi-card-list"></i>
+          <span>Register</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-login.html">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Login</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-error-404.html">
+          <i class="bi bi-dash-circle"></i>
+          <span>Error 404</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-blank.html">
+          <i class="bi bi-file-earmark"></i>
+          <span>Blank</span>
+        </a>
+      </li>
+
+    </ul>
+
+  </aside>

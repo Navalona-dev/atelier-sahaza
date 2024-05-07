@@ -1,17 +1,37 @@
-<div class="content-liste" id="content-liste">
-    <h1> Liste {{menu}} </h1>
-    <table class="table table-striped">
-        <thead>
-            {% include 'admin/table/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
-        </thead>
-        <tbody>
-            {% for liste in listes %}
-                {% include 'admin/table/_table.html.twig' with { 'type': 'tbody', 'menu': menu, 'liste': liste } %}
-            {% else %}
-                <tr>
-                    <td>Aucun enregistrement trouvé</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<div class="pagetitle">
+    <h1>Liste {{menu}} </h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('app_admin')}}">Accueil</a></li>
+        <li class="breadcrumb-item active">Liste</li>
+      </ol>
+    </nav>
+  </div>
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Liste {{menu}} </h5>
+            <table class="table datatable">
+              <thead>
+                    {% include 'admin/table/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
+              </thead>
+              <tbody>
+                {% for liste in listes %}
+                    {% include 'admin/table/_table.html.twig' with { 'type': 'tbody', 'menu': menu, 'liste': liste } %}
+                {% else %}
+                    <tr>
+                        <td>Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

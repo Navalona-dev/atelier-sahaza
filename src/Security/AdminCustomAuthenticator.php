@@ -63,7 +63,7 @@ class AdminCustomAuthenticator extends AbstractLoginFormAuthenticator
         // For example:
         //$url = $this->urlGenerator->generate('app_admin_liste') . '#dashboard';
         //return new RedirectResponse($url);
-        return new RedirectResponse($this->urlGenerator->generate('app_admin_liste'));
+        return new RedirectResponse($this->urlGenerator->generate('app_admin'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

@@ -9,7 +9,7 @@ $(document).ready(function() {
             method: 'GET',
             data: { menu: menu },
             success: function(response) {
-                $('#content').html(response); 
+                $('#main').html(response); 
             },
             error: function(xhr, status, error) {
                 console.error('Erreur lors du chargement de la page:', error);
@@ -17,4 +17,5 @@ $(document).ready(function() {
         });
     });
 });
+
 
