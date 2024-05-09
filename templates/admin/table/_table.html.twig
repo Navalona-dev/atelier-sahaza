@@ -19,13 +19,15 @@
             <td> {{liste.contact}} </td>
             <td> {{liste.adresse}} </td>
             <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
-            {% set isActiveText = '' %}
-            {% if liste.isActive == 0 %}
-                {% set isActiveText = "Non" %}
-            {% else %}
-                {% set isActiveText = "Oui" %}
-            {% endif %}
-            <td> {{isActiveText}} </td>
+            <td>
+                <span class="activate-toggle" data-id="{{ liste.id }}">
+                    {% if liste.isActive == 1 %}
+                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    {% endif %}
+                </span>
+            </td>
             <td>
                 <a href="#"><i class="bi bi-pencil-fill"></i></a>
                 <a href="#"><i class="bi bi-trash text-danger"></i></a>
@@ -50,13 +52,111 @@
             <td> {{liste.name}} </td>
             <td> {{liste.link}} </td>
             <td> {{liste.icon}} </td>
-            {% set isActiveText = '' %}
-            {% if liste.isActive == 0 %}
-                {% set isActiveText = "Non" %}
-            {% else %}
-                {% set isActiveText = "Oui" %}
-            {% endif %}
-            <td> {{isActiveText}} </td>
+            <td>
+                <span class="activate-toggle" data-id="{{ liste.id }}">
+                    {% if liste.isActive == 1 %}
+                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    {% endif %}
+                </span>
+            </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            <td>
+                <a href="#"><i class="bi bi-pencil-fill"></i></a>
+                <a href="#"><i class="bi bi-trash text-danger"></i></a>
+            </td>
+        </tr>
+    {% endif %}
+
+{%  elseif menu == "produit" %}
+    {% if type == "thead" %}
+        <tr class="text-nowrap" id="thead_{{menu}}">
+            <th>Identification</th>
+            <th>Categorie</th>
+            <th>Type</th>
+            <th>Reference</th>
+            <th>Est-il activé?</th>
+            <th>Description</th>
+            <th>Date de création</th>
+            <th>Actions</th>
+        </tr>
+    {% elseif type == "tbody" %}
+        <tr class="text-nowrap" id="tbody_{{menu}}">
+            <td> {{liste.id}} </td>
+            <td> {{liste.category.name}} </td>
+            <td> {{liste.type.name}} </td>
+            <td> {{liste.reference}} </td>
+            <td>
+                <span class="activate-toggle" data-id="{{ liste.id }}">
+                    {% if liste.isActive == 1 %}
+                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    {% endif %}
+                </span>
+            </td>
+            <td> {{liste.description|slice(0,30)|raw}} {% if liste.description|length > 30 %} ... {% endif %} </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            <td>
+                <a href="#"><i class="bi bi-pencil-fill"></i></a>
+                <a href="#"><i class="bi bi-trash text-danger"></i></a>
+            </td>
+        </tr>
+    {% endif %}
+
+{%  elseif menu == "categorie" %}
+    {% if type == "thead" %}
+        <tr class="text-nowrap" id="thead_{{menu}}">
+            <th>Identification</th>
+            <th>Nom</th>
+            <th>Est-il activé?</th>
+            <th>Date de création</th>
+            <th>Actions</th>
+        </tr>
+    {% elseif type == "tbody" %}
+        <tr class="text-nowrap" id="tbody_{{menu}}">
+            <td> {{liste.id}} </td>
+            <td> {{liste.name}} </td>
+            <td>
+                <span class="activate-toggle" data-id="{{ liste.id }}">
+                    {% if liste.isActive == 1 %}
+                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    {% endif %}
+                </span>
+            </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            <td>
+                <a href="#"><i class="bi bi-pencil-fill"></i></a>
+                <a href="#"><i class="bi bi-trash text-danger"></i></a>
+            </td>
+        </tr>
+    {% endif %}
+
+{%  elseif menu == "type" %}
+    {% if type == "thead" %}
+        <tr class="text-nowrap" id="thead_{{menu}}">
+            <th>Identification</th>
+            <th>Nom</th>
+            <th>Est-il activé?</th>
+            <th>Date de création</th>
+            <th>Actions</th>
+        </tr>
+    {% elseif type == "tbody" %}
+        <tr class="text-nowrap" id="tbody_{{menu}}">
+            <td> {{liste.id}} </td>
+            <td> {{liste.name}} </td>
+            <td>
+                <span class="activate-toggle" data-id="{{ liste.id }}">
+                    {% if liste.isActive == 1 %}
+                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                    {% endif %}
+                </span>
+            </td>
             <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
             <td>
                 <a href="#"><i class="bi bi-pencil-fill"></i></a>
@@ -65,3 +165,30 @@
         </tr>
     {% endif %}
 {% endif %}
+
+<script>
+    $(document).ready(function() {
+    $('.activate-toggle').click(function(event) {
+        console.log('ici');
+        event.preventDefault();
+        var id = $(this).data('id');
+        
+        $.ajax({
+            url: '/admin/liste/update-is-active/' + id,
+            method: 'POST', 
+            success: function(response) {
+                // Mettez à jour l'icône en fonction de la réponse
+                var icon = $('.activate-toggle[data-id="' + id + '"] i');
+                if (response.isActive == 1) {
+                    icon.removeClass('text-danger').addClass('text-success').removeClass('bi-x-circle-fill').addClass('bi-check-circle-fill');
+                } else {
+                    icon.removeClass('text-success').addClass('text-danger').removeClass('bi-check-circle-fill').addClass('bi-x-circle-fill');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur lors de la mise à jour de l\'état :', error);
+            }
+        });
+    });
+});
+</script>

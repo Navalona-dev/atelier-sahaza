@@ -178,19 +178,19 @@
     </div>
 </section>
 
-<section class="gallerie" id="gallerie">
+<section class="product" id="product">
     <div class="container-fluid pt-5 pb-3" id="gallery">
         <div class="container">
             <div class="position-relative d-flex align-items-center justify-content-center mb-5">
-                <h1 class="display-1 text-uppercase text-white gallerie-text-strok">Gallerie</h1>
-                <h1 class="position-absolute text-uppercase text-primary title">Notre gallerie</h1>
+                <h1 class="display-1 text-uppercase text-white product-text-strok">Produits</h1>
+                <h1 class="position-absolute text-uppercase text-primary title">Nos produits</h1>
             </div>
-            <div class="row gallerie-container">
+            <div class="row product-container">
                 {% for produit in produits %}
-                <div class="col-lg-4 col-md-6 mb-4 gallerie-item first">
+                <div class="col-lg-4 col-md-6 mb-4 product-item first">
                     <div class="position-relative overflow-hidden mb-2">
                         <img class="img-fluid rounded w-100" src="{{ asset('uploads/products/' ~ produit.image) }}" alt="">
-                        <div class="gallerie-btn bg-primary d-flex align-items-center justify-content-center">
+                        <div class="product-btn bg-primary d-flex align-items-center justify-content-center">
                             <a href="{{ asset('uploads/products/' ~ produit.image) }}" data-lightbox="gallery">
                                 <i class="fa fa-plus text-white" style="font-size: 60px;"></i>
                             </a>

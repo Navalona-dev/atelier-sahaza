@@ -3,14 +3,18 @@
 namespace App\Service;
 
 use DateTime;
+use App\Entity\Type;
 use App\Entity\Contact;
 use App\Entity\Gallery;
 use App\Entity\Product;
 use App\Entity\Quality;
+use App\Entity\Category;
 use App\Entity\HomePage;
 use App\Entity\SocialLink;
 use App\Entity\HomePageBlock;
 use Symfony\Component\Yaml\Yaml;
+use App\Repository\TypeRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use function Symfony\Component\String\u;
 use Symfony\Component\Filesystem\Filesystem;
@@ -20,13 +24,18 @@ class DefaultsLoader
 {
 
     private $em;
-
+    private $typeRepository;
+    private $categoryRepository;
 
     public function __construct(
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        TypeRepository $typeRepository,
+        CategoryRepository $categoryRepository
     )
     {
         $this->em = $em;
+        $this->typeRepository = $typeRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     private function maybeCreate($class, $criteria, ?string $repositoryMethodName = 'findOneBy'): array
@@ -45,6 +54,8 @@ class DefaultsLoader
         $this->socialLinks();
         $this->homePages();
         $this->qualites();
+        $this->categories();
+        $this->types();
         $this->produits();
         
     }
@@ -151,8 +162,49 @@ class DefaultsLoader
         }
     }
 
+    public function categories() {
+        $categories = Yaml::parseFile('defaults/data/category.yaml');
+
+        foreach ($categories as $label => $content) {
+            list($isNewCategory, $category) = $this->maybeCreate(Category::class, ['label' => $label]);
+            if($isNewCategory){
+                $date = new \DateTime();
+                $category->setLabel($label);
+                $category->setName($content['name']);
+                $category->setIsActive(true);
+                $category->setCreatedAt($date);
+                $this->em->persist($category);
+                $this->em->flush();
+
+            }
+            
+        }
+    }
+
+    public function types() {
+        $types = Yaml::parseFile('defaults/data/type.yaml');
+
+        foreach ($types as $label => $content) {
+            list($isNewType, $type) = $this->maybeCreate(Type::class, ['label' => $label]);
+            if($isNewType){
+                $date = new \DateTime();
+                $type->setLabel($label);
+                $type->setName($content['name']);
+                $type->setIsActive(true);
+                $type->setCreatedAt($date);
+                $this->em->persist($type);
+                $this->em->flush();
+
+            }
+            
+        }
+    }
+
     public function produits() {
         $produits = Yaml::parseFile('defaults/data/produit.yaml');
+
+        $types = $this->typeRepository->findAll();
+        $categories = $this->categoryRepository->findAll();
 
         foreach ($produits as $label => $content) {
             list($isNewProduit, $produit) = $this->maybeCreate(Product::class, ['label' => $label]);
@@ -160,8 +212,27 @@ class DefaultsLoader
                 $date = new \DateTime();
                 $produit->setLabel($label);
                 $produit->setImage($content['image']);
+                $produit->setDescription($content['description']);
+                $produit->setReference($content['reference']);
                 $produit->setIsActive(true);
                 $produit->setCreatedAt($date);
+
+               // Choisissez un type parmi les types disponibles
+                if (!empty($types)) {
+                    $randomType = $types[array_rand($types)];
+                    $produit->setType($randomType);
+                } else {
+                    // Gérer le cas où aucun type n'est trouvé
+                }
+
+               // Choisissez un categorie parmi les categories disponibles
+               if (!empty($categories)) {
+                    $randomCategorie = $categories[array_rand($categories)];
+                    $produit->setCategory($randomCategorie);
+                } else {
+                    // Gérer le cas où aucun categorie n'est trouvé
+                }
+
                 $this->em->persist($produit);
                 $this->em->flush();
 
