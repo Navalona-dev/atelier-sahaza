@@ -239,10 +239,10 @@
 
 
 /*---------------------------------------
-#SECTION GALLERIE
+#SECTION PRODUIT
 ------------------------------------*/
 
-.gallerie-item .gallerie-btn {
+.product-item .product-btn {
   position: absolute;
   width: 0;
   height: 0;
@@ -253,7 +253,7 @@
   transition: .5s;
 }
 
-.gallerie-item:hover .gallerie-btn {
+.product-item:hover .product-btn {
   opacity: 1;
   width: calc(100% - 60px);
   height: calc(100% - 60px);
@@ -261,7 +261,7 @@
   left: 30px;
 }
 
-.gallerie-text-strok {
+.product-text-strok {
   -webkit-text-stroke: 1px #dee2e6;
   font-size: 100px;
 }

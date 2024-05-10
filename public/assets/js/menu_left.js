@@ -10,6 +10,8 @@ $(document).ready(function() {
             data: { menu: menu },
             success: function(response) {
                 $('#main').html(response); 
+                // Mettre à jour l'URL avec le paramètre menu
+                window.history.pushState({menu: menu}, '', '/admin/liste#' + menu);
             },
             error: function(xhr, status, error) {
                 console.error('Erreur lors du chargement de la page:', error);
@@ -17,5 +19,9 @@ $(document).ready(function() {
         });
     });
 });
+
+
+
+
 
 

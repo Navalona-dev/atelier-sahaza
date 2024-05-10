@@ -1,8 +1,18 @@
+<style>
+  .dataTables_scroll {
+    margin-top: 50px !important;
+    margin-bottom: 30px !important;
+  }
+  td, tr {
+    border-bottom: none !important;
+  }
+</style>
+
 <div class="pagetitle">
     <h1>Liste {{menu}} </h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{path('app_admin')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{path('app_admin')}}">Tableau de board</a></li>
         <li class="breadcrumb-item active">Liste</li>
       </ol>
     </nav>
@@ -14,7 +24,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Liste {{menu}} </h5>
-            <table class="table datatable">
+            <table class="table table-striped" id="liste-table" style="width: 100%;">
               <thead>
                     {% include 'admin/table/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
               </thead>
@@ -35,3 +45,19 @@
       </div>
     </div>
   </section>
+
+  <script>
+    //datatable
+    $(document).ready(function() {
+      $('#liste-table').DataTable({
+        responsive: true,
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/fr-FR.json',
+      },
+        border: false,
+        scrollX: '100%',
+        pageLength: 10,
+        scrollCollapse: false,
+      });
+    });
+  </script>

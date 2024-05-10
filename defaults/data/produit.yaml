@@ -1,17 +1,29 @@
 gallerie1:
   image: 'portfolio-1.jpg'
+  description: Une porte en acier au design épuré, idéale pour ajouter une touche moderne à votre intérieur.
+  reference: SecureGuard 2000
 
 gallerie2:
   image: 'portfolio-2.jpg'
+  description: Une fenêtre en aluminium robuste, offrant à la fois durabilité et esthétique pour votre maison.
+  reference: Titanium View
 
 gallerie3:
   image: 'portfolio-3.jpg'
+  description: Un escalier en métal compact et élégant, parfait pour les espaces restreints tout en assurant une utilisation durable.
+  reference: SteelStep Pro
 
 gallerie4:
   image: 'portfolio-4.jpg'
+  description: Une charpente en acier légère et solide, idéale pour soutenir votre toit avec efficacité.
+  reference: IronBeam 5000
 
 gallerie5:
   image: 'portfolio-5.jpg'
+  description: Un garde-corps en acier galvanisé, offrant une protection fiable pour les balcons et les escaliers.
+  reference: SafeGuard Elite
 
 gallerie6:
   image: 'portfolio-6.jpg'
+  description: Une poutre en acier traité, garantissant une structure solide pour votre bâtiment. 
+  reference: IronGuard Fortress
