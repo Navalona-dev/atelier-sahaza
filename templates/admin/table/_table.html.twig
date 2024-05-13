@@ -20,7 +20,7 @@
             <td> {{liste.adresse}} </td>
             <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
             <td>
-                <span class="activate-toggle" data-id="{{ liste.id }}">
+                <span class="activate-toggle" data-id="{{ liste.id }}" onclick="return setActive({{liste.id}})">
                     {% if liste.isActive == 1 %}
                         <i class="bi bi-check-circle-fill text-success fs-5"></i>
                     {% else %}
@@ -53,7 +53,7 @@
             <td> {{liste.link}} </td>
             <td> {{liste.icon}} </td>
             <td>
-                <span class="activate-toggle" data-id="{{ liste.id }}">
+                <span class="activate-toggle" data-id="{{ liste.id }}" onclick="return setActive({{liste.id}})">
                     {% if liste.isActive == 1 %}
                         <i class="bi bi-check-circle-fill text-success fs-5"></i>
                     {% else %}
@@ -88,7 +88,7 @@
             <td> {{liste.type.name}} </td>
             <td> {{liste.reference}} </td>
             <td>
-                <span class="activate-toggle" data-id="{{ liste.id }}">
+                <span class="activate-toggle" data-id="{{ liste.id }}" onclick="return setActive({{liste.id}})">
                     {% if liste.isActive == 1 %}
                         <i class="bi bi-check-circle-fill text-success fs-5"></i>
                     {% else %}
@@ -119,7 +119,7 @@
             <td> {{liste.id}} </td>
             <td> {{liste.name}} </td>
             <td>
-                <span class="activate-toggle" data-id="{{ liste.id }}">
+                <span class="activate-toggle" data-id="{{ liste.id }}" onclick="return setActive({{liste.id}})">
                     {% if liste.isActive == 1 %}
                         <i class="bi bi-check-circle-fill text-success fs-5"></i>
                     {% else %}
@@ -167,12 +167,7 @@
 {% endif %}
 
 <script>
-    $(document).ready(function() {
-    $('.activate-toggle').click(function(event) {
-        console.log('ici');
-        event.preventDefault();
-        var id = $(this).data('id');
-        
+    function setActive(id) {
         $.ajax({
             url: '/admin/liste/update-is-active/' + id,
             method: 'POST', 
@@ -189,6 +184,8 @@
                 console.error('Erreur lors de la mise à jour de l\'état :', error);
             }
         });
-    });
+    }
+    $(document).ready(function() {
+   
 });
 </script>
