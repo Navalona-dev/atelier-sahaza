@@ -6,6 +6,7 @@
   td, tr {
     border-bottom: none !important;
   }
+ 
 </style>
 
 <div class="pagetitle">
@@ -23,14 +24,21 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Liste {{menu}} </h5>
+            <div class="row">
+              <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12">
+                <h5 class="card-title">Liste {{menu}} </h5>
+              </div>
+              <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 mt-4 mb-5">
+                <button class="btn btn-primary btn-sm" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#modalNew" onclick="return newData()">Nouveau {{ menu }} </button>
+              </div>
+            </div>
             <table class="table table-striped" id="liste-table" style="width: 100%;">
               <thead>
-                    {% include 'admin/table/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
+                    {% include 'admin/liste/_table.html.twig' with { 'type': 'thead', 'menu': menu } %}
               </thead>
               <tbody>
                 {% for liste in listes %}
-                    {% include 'admin/table/_table.html.twig' with { 'type': 'tbody', 'menu': menu, 'liste': liste } %}
+                    {% include 'admin/liste/_table.html.twig' with { 'type': 'tbody', 'menu': menu, 'liste': liste } %}
                 {% else %}
                     <tr>
                         <td>Aucun enregistrement trouvé</td>
@@ -44,6 +52,7 @@
 
       </div>
     </div>
+    
   </section>
 
   <script>

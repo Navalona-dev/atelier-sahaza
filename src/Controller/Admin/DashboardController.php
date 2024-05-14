@@ -74,9 +74,9 @@ class DashboardController extends AbstractController
             return $this->render('admin/dashboard/index.html.twig');
         } else {
 
-            $content = $this->renderView('admin/table/index.html.twig', [
+            $content = $this->renderView('admin/liste/index.html.twig', [
                 'menu' => $menu,
-                'listes' => $listes
+                'listes' => $listes,
             ]);
 
             return new JsonResponse($content);
