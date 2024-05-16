@@ -7,11 +7,47 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                
                 {{ form_start(form, {'attr': {'id': 'newData', 'action': path('app_admin_new') }}) }}
-                    <div class="form-group mb-3">
-                        <label for="" class="mb-2">Nom du categorie</label>
-                        {{ form_widget(form.name) }}
-                    </div>
+                    {% if menu == 'categorie' %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du categorie</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+
+                    {% elseif menu == "type" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du type</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+
+                    {% elseif menu == "produit" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom de produit</label>
+                            {{form_widget(form.name)}}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Categorie</label>
+                            {{form_widget(form.category)}}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">TYpe</label>
+                            {{form_widget(form.type)}}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Référence</label>
+                            {{form_widget(form.reference)}}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Description</label>
+                            {{form_widget(form.description)}}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Image</label>
+                            {{form_widget(form.imageFile)}}
+                        </div>
+                    {% endif %}
+
                     <input type="hidden" name="menu" value="{{menu}}">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-sm px-3">Ajouter</button>

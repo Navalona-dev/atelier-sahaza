@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -21,6 +25,11 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+     /**
+    * @Vich\UploadableField(mapping="product_image", fileNameProperty="image")]
+    */
+    public ?File $imageFile = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,6 +68,11 @@ class Product
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,11 +83,22 @@ class Product
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
         return $this;
+    }
+
+    public function setImageFile(File $image )
+    {
+        $this->imageFile = $image;
+    }
+
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -156,6 +181,18 @@ class Product
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

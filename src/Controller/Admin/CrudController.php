@@ -2,15 +2,19 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Type;
+use App\Entity\Product;
 use App\Entity\Category;
+use App\Form\ProductType;
 use App\Form\CategoryType;
+use App\Form\TypeFormType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CrudController extends AbstractController
 {
@@ -56,8 +60,55 @@ class CrudController extends AbstractController
                     return $this->redirectToRoute('app_admin_liste');
                 }
                 break;
+
             case 'produit':
+                $produit = new Product();
+                 $form = $this->createForm(ProductType::class, $produit);
+                
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    
+                    $date = new \DateTime();
+                    $produit->setCreatedAt($date)
+                            ->setIsActive(1);
+                    
+                    $this->em->persist($produit);
+                    $this->em->flush();
+
+                    if ($request->isXmlHttpRequest()) {
+                        return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                    }
+
+                    $this->addFlash('success', 'Produit ajouté avec succès');
+                    return $this->redirectToRoute('app_admin_liste');
+                }
                 break;
+
+            case 'type':
+                $type = new Type();
+                 $form = $this->createForm(TypeFormType::class, $type);
+                
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    
+                    $date = new \DateTime();
+                    $type->setCreatedAt($date)
+                            ->setIsActive(1);
+                    
+                    $this->em->persist($type);
+                    $this->em->flush();
+
+                    if ($request->isXmlHttpRequest()) {
+                        return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                    }
+
+                    $this->addFlash('success', 'Type de produit ajouté avec succès');
+                    return $this->redirectToRoute('app_admin_liste');
+                }
+                break;
+
             default:
                 # code...
                 break;

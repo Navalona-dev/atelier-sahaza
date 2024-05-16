@@ -212,6 +212,7 @@ class DefaultsLoader
                 $date = new \DateTime();
                 $produit->setLabel($label);
                 $produit->setImage($content['image']);
+                $produit->setName($content['name']);
                 $produit->setDescription($content['description']);
                 $produit->setReference($content['reference']);
                 $produit->setIsActive(true);
