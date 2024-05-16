@@ -1,20 +1,20 @@
 
-<div class="modal fade" id="modalNew" tabindex="-1" aria-labelledby="modalNewLabel" aria-hidden="true">
+<div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="modalNewLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalNewLabel">Création nouveau {{menu}}</h5>
+                <h5 class="modal-title" id="modalNewLabel">Modifier {{menu}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{ form_start(form, {'attr': {'id': 'newData', 'action': path('app_admin_new') }}) }}
+                {{ form_start(form, {'attr': {'id': 'updateData', 'action': path('app_admin_update', {'id': id}) }}) }}
                     <div class="form-group mb-3">
                         <label for="" class="mb-2">Nom du categorie</label>
                         {{ form_widget(form.name) }}
                     </div>
                     <input type="hidden" name="menu" value="{{menu}}">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-sm px-3">Ajouter</button>
+                        <button type="submit" class="btn btn-primary btn-sm px-3">Modifier</button>
                     </div>
                 {{ form_end(form) }}
             </div>
@@ -25,7 +25,7 @@
 
 <script>
     $(document).ready(function () {
-       $('#newData').on('submit', function (e) {
+       $('#updateData').on('submit', function (e) {
             e.preventDefault();
             let form = $(this);
             var menu = '{{menu}}';
@@ -34,7 +34,7 @@
                 type: form.attr('method'),
                 data: form.serialize(),
                 success: function (response) {
-                    $('#modalNew').modal('hide');
+                    $('#modalUpdate').modal('hide');
                     var nextLink = $('#sidebar').find('li#'+menu).find('a');
                     setTimeout(function () {
                         toastr.options = {

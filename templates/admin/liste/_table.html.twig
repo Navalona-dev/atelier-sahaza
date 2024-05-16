@@ -129,8 +129,8 @@
             </td>
             <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
             <td>
-                <a href="#"><i class="bi bi-pencil-fill"></i></a>
-                <a href="#"><i class="bi bi-trash text-danger"></i></a>
+                <a href="#" onclick="return openModalUpdateEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-pencil-fill"></i></a>
+                <a href="#" onclick="return deleteEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-trash text-danger"></i></a>
             </td>
         </tr>
     {% endif %}
@@ -167,6 +167,56 @@
 {% endif %}
 
 <script>
+    
+    function deleteEntity(id = null, menu = null) {
+        if (confirm("Voulez vous vraiment supprimer cet '+ menu +'?")) {
+            $.ajax({
+                url: '/data/delete/'+id,
+                type: 'POST',
+                data: {menu: menu, id: id},
+                success: function (response) {
+                    var nextLink = $('#sidebar').find('li#'+menu).find('a');
+                    setTimeout(function () {
+                        toastr.options = {
+                            closeButton: true,
+                            progressBar: true,
+                            showMethod: 'slideDown',
+                            timeOut: 1000
+                        };
+                        toastr.success('Avec succèss', 'Suppression effectuée');
+
+                        //$(".loadBody").css('display', 'none');
+
+                    }, 800);
+                    if (nextLink.length > 0) {
+                        nextLink.click();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Gérer l'erreur (par exemple, afficher un message d'erreur)
+                    alert('Erreur lors de l\'ajout de la catégorie.');
+                }
+            });
+        }
+    }
+
+    function openModalUpdateEntity(id = null, menu = null) {
+        $.ajax({
+                url: '/data/update/'+id,
+                type: 'POST',
+                data: {menu: menu, id: id},
+                success: function (response) {
+                    $("#blocModalEmpty").empty();
+                    $("#blocModalEmpty").append(response);
+                    $('#modalUpdate').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Gérer l'erreur (par exemple, afficher un message d'erreur)
+                    alert('Erreur lors de l\'ajout de la catégorie.');
+                }
+            });
+    }
+
     function setActive(id) {
         $.ajax({
             url: '/admin/liste/update-is-active/' + id,
