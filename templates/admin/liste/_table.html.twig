@@ -169,7 +169,7 @@
 <script>
     
     function deleteEntity(id = null, menu = null) {
-        if (confirm("Voulez vous vraiment supprimer cet '+ menu +'?")) {
+        if (confirm('Voulez vous vraiment supprimer cet '+ menu +'?')) {
             $.ajax({
                 url: '/data/delete/'+id,
                 type: 'POST',
