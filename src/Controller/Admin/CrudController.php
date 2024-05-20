@@ -9,6 +9,7 @@ use App\Form\ProductType;
 use App\Form\CategoryType;
 use App\Form\TypeFormType;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,11 +65,9 @@ class CrudController extends AbstractController
             case 'produit':
                 $produit = new Product();
                  $form = $this->createForm(ProductType::class, $produit);
-                
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    
                     $date = new \DateTime();
                     $produit->setCreatedAt($date)
                             ->setIsActive(1);
@@ -124,13 +123,25 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/delete/{id}", name="app_admin_delete", methods={"POST"})
      */
-    public function delete($id, Request $request, CategoryRepository $categoryRepository): Response
+    public function delete($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
+        $menu = $request->get('menu');
+        $entity = null;
+        switch ($menu) {
+            case 'categorie':
+                $entity = $categoryRepository->find($id);
+                break;
+            case 'produit':
+                $entity = $productRepository->find($id);
+                break;
+            default:
+                # code...
+                break;
+        }
         
-        $category = $categoryRepository->find($id);
 
-        if ($category) {
-            $this->em->remove($category);
+        if ($entity) {
+            $this->em->remove($entity);
             $this->em->flush();
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
@@ -142,7 +153,7 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/update/{id}", name="app_admin_update", methods={"POST"})
      */
-    public function update($id, Request $request, CategoryRepository $categoryRepository): Response
+    public function update($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
         $menu = $request->get('menu');
 
@@ -166,23 +177,46 @@ class CrudController extends AbstractController
                         return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
                     }
 
-                    $this->addFlash('success', 'Categorie ajouté avec succès');
+                    $this->addFlash('success', 'Categorie modifié avec succès');
                     return $this->redirectToRoute('app_admin_liste');
                 }
-
+                return $this->render('admin/liste/modal_update.html.twig', [
+                    'form' => $form->createView(),
+                    'id' => $request->get('id'),
+                    'menu' => $menu
+                ]);
                 break;
             case 'produit':
-                break;
+                $produit = $productRepository->find($id);
+                $form = $this->createForm(ProductType::class, $produit);
+               $form->handleRequest($request);
+
+               if ($form->isSubmitted() && $form->isValid()) {
+                //dd($request);
+                   $date = new \DateTime();
+                   $produit->setCreatedAt($date)
+                           ->setIsActive(1);
+                   
+                   $this->em->persist($produit);
+                   $this->em->flush();
+
+                   if ($request->isXmlHttpRequest()) {
+                       return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                   }
+
+                   $this->addFlash('success', 'Produit modifié avec succès');
+                   return $this->redirectToRoute('app_admin_liste');
+               }
+               return $this->render('admin/liste/modal_update_produit.html.twig', [
+                'form' => $form->createView(),
+                'id' => $request->get('id'),
+                'menu' => $menu
+            ]);
+               break;
             default:
                 # code...
                 break;
         }
-        
-        return $this->render('admin/liste/modal_update.html.twig', [
-            'form' => $form->createView(),
-            'id' => $request->get('id'),
-            'menu' => $menu
-        ]);
     }
 
 }

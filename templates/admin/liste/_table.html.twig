@@ -99,8 +99,8 @@
             <td> {{liste.description|slice(0,30)|raw}} {% if liste.description|length > 30 %} ... {% endif %} </td>
             <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
             <td>
-                <a href="#"><i class="bi bi-pencil-fill"></i></a>
-                <a href="#"><i class="bi bi-trash text-danger"></i></a>
+                <a href="#" onclick="return openModalUpdateEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-pencil-fill"></i></a>
+                <a href="#" onclick="return deleteEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-trash text-danger"></i></a>
             </td>
         </tr>
     {% endif %}
