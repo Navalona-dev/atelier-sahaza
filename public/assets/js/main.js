@@ -16,7 +16,7 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     $(".navbar").hide();
     $(window).scroll(function() {
         var scroll = $(window).scrollTop();
@@ -26,7 +26,24 @@ $(document).ready(function() {
             $(".navbar").slideUp('slow'); // Animation de glissement vers le haut
         }
     });
+});*/
+
+$(document).ready(function() {
+    // Vérifiez si l'URL de la page se termine par "index.html" ou si vous pouvez identifier la classe ou l'ID unique de la page d'accueil
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
+        // Si la condition est vraie, exécutez le code jQuery uniquement sur la page d'accueil
+        $(".navbar").hide();
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll > 50) {
+                $(".navbar").slideDown('slow'); // Animation de glissement vers le bas
+            } else {
+                $(".navbar").slideUp('slow'); // Animation de glissement vers le haut
+            }
+        });
+    }
 });
+
 
 //section about
 
@@ -71,4 +88,13 @@ $(document).ready(function() {
         items: 1
     });
 })
+
+$(document).ready(function(){
+    $('.dropdown').hover(function(){
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+    }, function(){
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+    });
+});
+
 
