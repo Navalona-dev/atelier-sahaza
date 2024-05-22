@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit métallique{% endblock %}
+
+{% block stylesheets %}
+
+    <style>
+        .navbar {
+            background-color: #4682B4 !important;
+        }
+
+        span.text-primary {
+            color: #fff !important;
+        }
+
+        .nav-item {
+            color: #fff !important;
+        }
+        .navbar .nav-link:hover, .navbar .nav-link.active {
+            border-bottom: 1px solid #fff !important;
+        }
+
+        .btn-outline-primary {
+            border: 1px solid #fff !important;
+            color: #fff !important;
+        }
+        .product-detail {
+            margin-top: 150px;
+            margin-bottom: 100px;
+        }
+        .detail {
+            margin-left: 50px;
+        }
+        .description {
+            text-align: justify;
+        }
+    </style>
+
+{% endblock %}
+
+{% set product = "" %}
+{% for homePage in homePages %}
+    {% if homePage.label == "detailProduct" %}
+        {% set product = homePage %}
+    {% endif %}
+{% endfor %}
+
+{% block body %}
+<section class="product-detail">
+    <div class="container">
+        <h1 class="text-center fw-bold mb-3"> {{product.title}} </h1>
+        <p class="text-center mb-5"> {{product.description|raw}} </p>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <img src="{{ asset('uploads/products/' ~ produit.image) }}" alt="" style="width: 100%;">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="detail">
+                    <h2 class="fw-bold">{{produit.name}} </h2>
+                    <p><strong>Référence : </strong> {{produit.reference}} </p>
+                    <p><strong>Type : </strong> {{produit.type.name}} </p>
+                    <p><strong>Catégorie : </strong> {{produit.category.name}} </p>
+                    <hr>
+                    <p class="description"> {{produit.description|raw}} </p>
+                    <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="btn btn-primary px-5 btn-sm mt-4">Envoyer un message</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
