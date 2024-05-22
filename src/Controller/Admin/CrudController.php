@@ -151,11 +151,13 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/delete/{id}", name="app_admin_delete", methods={"POST"})
      */
+
     public function delete(
         $id, 
         Request $request, 
         CategoryRepository $categoryRepository, 
         ProductRepository $productRepository): Response
+
     {
         $menu = $request->get('menu');
         $entity = null;
