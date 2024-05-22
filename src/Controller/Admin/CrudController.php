@@ -3,16 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Type;
+use App\Entity\Contact;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Form\ContactType;
 use App\Form\ProductType;
 use App\Form\CategoryType;
 use App\Form\MessageType;
 use App\Form\TypeFormType;
-use App\Repository\CategoryRepository;
-use App\Repository\MessageRepository;
+
 use App\Repository\ProductRepository;
-use App\Repository\TypeRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -111,6 +112,30 @@ class CrudController extends AbstractController
                 }
                 break;
 
+            case 'contact':
+                $contact = new Contact();
+                    $form = $this->createForm(ContactType::class, $contact);
+                
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    
+                    $date = new \DateTime();
+                    $contact->setCreatedAt($date)
+                            ->setIsActive(1);
+                    
+                    $this->em->persist($contact);
+                    $this->em->flush();
+
+                    if ($request->isXmlHttpRequest()) {
+                        return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                    }
+
+                    $this->addFlash('success', 'Contact ajouté avec succès');
+                    return $this->redirectToRoute('app_admin_liste');
+                }
+                break;
+
             default:
                 # code...
                 break;
@@ -126,7 +151,11 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/delete/{id}", name="app_admin_delete", methods={"POST"})
      */
-    public function delete($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository, MessageRepository $messageRepository, TypeRepository $typeRepository): Response
+    public function delete(
+        $id, 
+        Request $request, 
+        CategoryRepository $categoryRepository, 
+        ProductRepository $productRepository): Response
     {
         $menu = $request->get('menu');
         $entity = null;

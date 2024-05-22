@@ -5,10 +5,14 @@
 {% block body %}
 
 {% set about = "" %}
+{% set siege = "" %}
 
 {% for homePage in homePages %}
     {% if homePage.label == "about" %}
         {% set about = homePage %}
+    {% endif %}
+    {% if homePage.label == "siege" %}
+        {% set siege = homePage %}
     {% endif %}
 {% endfor %}
 
@@ -260,26 +264,42 @@
     </div>
 </section>
 
-<div class="container-fluid bg-primary text-white mt-5 py-5 px-sm-3 px-md-5 footer" id="footer">
-    <div class="container text-center py-5">
-        <div class="d-flex justify-content-center mb-4">
-            {% for socialLink in socialLinks %}
-                <a class="btn btn-light btn-social mr-2" href="{{socialLink.link}}"><i class="{{socialLink.icon}}"></i></a>
-            {% endfor %}
+<section class="location" id="location">
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center mb-5">
+                <h1 class="display-1 text-uppercase text-white siege-text-strok">Siège</h1>
+                <h1 class="position-absolute text-uppercase text-primary title">Notre siège</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="siege-description">
+                        <p style="text-align: justify; line-height: 2;"> {{siege.description|raw}} </p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="row">
+                        {% for contact in contacts %}
+                            <div class="col-12">
+                                <div style="margin-left: 50px;">
+                                    <h3 class="fw-bold"> {{contact.name}} </h3>
+                                    <p><strong>Adresse exacte : </strong> {{contact.adresse}} </p>
+                                    <p><strong>Numéro téléphone : </strong> {{contact.contact}} </p>
+                                    <p><strong>Adresse e-mail : </strong> {{contact.email}} </p>
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                   
+                </div>
+            </div>
+           
         </div>
-        <div class="d-flex justify-content-center mb-3">
-            <a class="text-white text-decoration-none" href="#">Privacy</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="#">Terms</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="#">FAQs</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="#">Help</a>
-        </div>
-        <p class="m-0">&copy; <a class="text-white font-weight-bold text-decoration-none" href="#">Domain Name</a>. All Rights Reserved. Designed by <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
-        </p>
     </div>
-</div>
+</section>
+
 <script src="{{ asset('assets/vendor/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript">
 

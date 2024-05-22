@@ -49,6 +49,17 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findProductAllimunium()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->join('p.type', 't') 
+            ->andWhere('t.name = :name') 
+            ->setParameter('name', 'Allimunium') 
+            ->getQuery()
+            ->getResult();
+    }
     
     
 }

@@ -15,3 +15,7 @@ produitAlluminium:
 detailProduct:
   title: Détail du Produit
   description: Découvrez en détail notre produit sélectionné. Plongez dans les caractéristiques uniques, les spécifications techniques et les aspects pratiques de cet article. Que vous recherchiez des dimensions précises, des matériaux de fabrication ou des informations sur l'entretien, cette section vous fournira toutes les informations nécessaires pour prendre une décision éclairée. Explorez les détails du produit et découvrez ce qui le rend spécial.
+
+siege:
+  title:
+  description: Nos sièges sont répartis stratégiquement pour offrir un service optimal et un support efficace à nos clients. Chaque site est équipé pour répondre rapidement à vos besoins, garantissant ainsi une proximité et une disponibilité accrues. Nos équipes sur place sont prêtes à vous accueillir et à vous fournir un service personnalisé et de haute qualité

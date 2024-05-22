@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit allimunium{% endblock %}
+
+{% block stylesheets %}
+
+    <style>
+        .navbar {
+            background-color: #4682B4 !important;
+        }
+
+        span.text-primary {
+            color: #fff !important;
+        }
+
+        .nav-item {
+            color: #fff !important;
+        }
+        .navbar .nav-link:hover, .navbar .nav-link.active {
+            border-bottom: 1px solid #fff !important;
+        }
+
+        .btn-outline-primary {
+            border: 1px solid #fff !important;
+            color: #fff !important;
+        }
+        .product-list {
+            margin-top: 150px;
+            margin-bottom: 100px;
+        }
+    </style>
+
+{% endblock %}
+
+{% set product = "" %}
+{% for homePage in homePages %}
+    {% if homePage.label == "produitAlluminium" %}
+        {% set product = homePage %}
+    {% endif %}
+{% endfor %}
+
+{% block body %}
+<section class="product-list">
+    <div class="container">
+        <h1 class="text-center fw-bold mb-3"> {{product.title}} </h1>
+        <p class="text-center mb-5"> {{product.description|raw}} </p>
+        <div class="row product-container">
+            {% for produit in products %}
+            <div class="col-lg-4 col-md-6 mb-4 product-item first">
+                <div class="position-relative overflow-hidden mb-2">
+                    <img class="img-fluid rounded w-100" src="{{ asset('uploads/products/' ~ produit.image) }}" alt="">
+                    <div class="product-btn bg-primary d-flex align-items-center justify-content-center">
+                        <a href="{{path('app_front_produit', {'id' : produit.id})}}" data-lightbox="gallery">
+                            <i class="fa fa-plus text-white" style="font-size: 60px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+{% endblock %}

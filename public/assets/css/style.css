@@ -269,7 +269,7 @@
 /*---------------------------------
 #SECTION CONTACT
 ---------------------------------*/
-.contact-text-strok {
+.contact-text-strok, .siege-text-strok {
   -webkit-text-stroke: 1px #dee2e6;
   font-size: 100px;
 }
