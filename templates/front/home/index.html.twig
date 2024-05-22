@@ -5,10 +5,14 @@
 {% block body %}
 
 {% set about = "" %}
+{% set siege = "" %}
 
 {% for homePage in homePages %}
     {% if homePage.label == "about" %}
         {% set about = homePage %}
+    {% endif %}
+    {% if homePage.label == "siege" %}
+        {% set siege = homePage %}
     {% endif %}
 {% endfor %}
 
@@ -256,6 +260,42 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="location" id="location">
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center mb-5">
+                <h1 class="display-1 text-uppercase text-white siege-text-strok">Siège</h1>
+                <h1 class="position-absolute text-uppercase text-primary title">Notre siège</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="siege-description">
+                        <p style="text-align: justify; line-height: 2;"> {{siege.description|raw}} </p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="row">
+                        {% for contact in contacts %}
+                            <div class="col-12">
+                                <div style="margin-left: 50px;">
+                                    <h3 class="fw-bold"> {{contact.name}} </h3>
+                                    <p><strong>Adresse exacte : </strong> {{contact.adresse}} </p>
+                                    <p><strong>Numéro téléphone : </strong> {{contact.contact}} </p>
+                                    <p><strong>Adresse e-mail : </strong> {{contact.email}} </p>
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                   
+                </div>
+            </div>
+           
         </div>
     </div>
 </section>

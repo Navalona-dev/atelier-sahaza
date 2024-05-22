@@ -51,7 +51,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
-        $contact = $this->contactRepository->findOneBy(['isActive' => true]);
+        $contacts = $this->contactRepository->findBy(['isActive' => true]);
         $qualities = $this->qualityRepository->findBy(['isActive' => true]);
         $produits = $this->productRepository->findBy(['isActive' => true]);
 
@@ -62,7 +62,7 @@ class HomeController extends AbstractController
         $form = $this->createForm(MessageType::class, $message); 
 
         return $this->render('front/home/index.html.twig', [
-            'contact' => $contact,
+            'contacts' => $contacts,
             'socialLinks' => $socialLinks,
             'homePages' => $homePages,
             'qualites' => $qualities,

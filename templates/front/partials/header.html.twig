@@ -11,13 +11,14 @@
                 <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#about {% else %} #about {% endif %}" class="nav-item nav-link">A propos</a>
                 <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#skills {% else %} #skills {% endif %}" class="nav-item nav-link">Compétence</a>
                 <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="nav-item nav-link">Contact</a>
+                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#location {% else %} #location {% endif %}" class="nav-item nav-link">Siège</a>
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle nav-item nav-link" data-bs-toggle="dropdown" aria-expanded="false">
                       Produits
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#product {% else %} #product {% endif %}">Tous</a></li>
-                      <li><a class="dropdown-item" href="#">Allimunium</a></li>
+                      <li><a class="dropdown-item" href="{{path('app_front_produit_allimunium')}}">Allimunium</a></li>
                       <li><a class="dropdown-item" href="{{path('app_front_produit_metallique')}}">Métallique</a></li>
                     </ul>
                   </div>

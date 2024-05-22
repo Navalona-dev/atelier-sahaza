@@ -47,6 +47,25 @@ class ProduitController extends AbstractController
     }
 
     /**
+     * @Route("/produit/allimunium", name="app_front_produit_allimunium")
+     */
+    public function produitAllimunium(): Response
+    {
+        $homePages = $this->homePageRepository->findAll();
+
+        $products = $this->productRepo->findProductAllimunium();
+
+        $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
+
+        return $this->render('front/product/produit_allimunium.html.twig', [
+            'products' => $products,
+            'homePages' => $homePages,
+            'socialLinks' => $socialLinks,
+
+        ]);
+    }
+
+    /**
      * @Route("/produit/detail/{id}", name="app_front_produit")
      */
 
