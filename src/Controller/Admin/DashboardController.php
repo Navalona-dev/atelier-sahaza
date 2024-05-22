@@ -6,6 +6,7 @@ use App\Repository\TypeRepository;
 use App\Repository\ContactRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\MessageRepository;
 use App\Repository\SocialLinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +22,15 @@ class DashboardController extends AbstractController
     private $productRepository;
     private $categoryRepository;
     private $typeRepository;
+    private $messageRepository;
 
     public function __construct(
         ContactRepository $contactRepo,
         SocialLinkRepository $socialLinkRepo,
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-        TypeRepository $typeRepository
+        TypeRepository $typeRepository,
+        MessageRepository   $messageRepository
     )
     {
         $this->contactRepo = $contactRepo;
@@ -35,6 +38,7 @@ class DashboardController extends AbstractController
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->typeRepository = $typeRepository;
+        $this->messageRepository = $messageRepository;
     }
 
     /**
@@ -68,6 +72,8 @@ class DashboardController extends AbstractController
             $listes = $this->categoryRepository->findAll();
         } elseif ($menu == "type") {
             $listes = $this->typeRepository->findAll();
+        } elseif ($menu == "message") {
+            $listes = $this->messageRepository->findAll();
         }
 
         if(!$menu) {

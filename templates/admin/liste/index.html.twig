@@ -28,9 +28,11 @@
               <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12">
                 <h5 class="card-title">Liste {{menu}} </h5>
               </div>
+              {% if menu != "message" %}
               <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 mt-4 mb-5">
                 <button class="btn btn-primary btn-sm" style="width: 100%;"  onclick="return newData('{{menu}}')">Nouveau {{ menu }} </button>
               </div>
+              {% endif %}
             </div>
             <table class="table table-striped" id="liste-table" style="width: 100%;">
               <thead>

@@ -214,35 +214,45 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-form text-center">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        {% set messageNotification = "" %}
+                        {% block messageNotificationContainer %}
+                                <div class="flash" id="success" style="margin-bottom: 0; display: none;">
+                                    <div class="alert alert-success">
+                                        {{messageNotification}}
+                                    </div>
+                                </div>         
+                        {% endblock %}
+                       
+                        {# <form name="sentMessage" id="contactForm" novalidate="novalidate"> #}
+                        {{ form_start(formMessage, {'attr': {'id': 'message', 'action': path('send_message') }}) }}
                             <div class="row">
                                 <div class="control-group col-sm-6">
-                                    <input type="text" class="form-control p-3" id="name" placeholder="Votre nom de famille"
-                                        required="required" data-validation-required-message="Please enter your name" />
+                                    {{form_widget(formMessage.nom)}}
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group col-sm-6">
-                                    <input type="email" class="form-control p-3" id="email" placeholder="Votre prénom(s)"
-                                        required="required" data-validation-required-message="Please enter your email" />
+                                    {{form_widget(formMessage.prenom)}}
+                                  
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control p-3" id="subject" placeholder="Objet"
-                                    required="required" data-validation-required-message="Please enter a subject" />
+                                {{form_widget(formMessage.objet)}}
+                             
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <textarea class="form-control py-3 px-4" rows="5" id="message" placeholder="Message"
+                                {{form_widget(formMessage.message)}}
+                                 {# <textarea class="form-control py-3 px-4" name = "message[message]" rows="5" id="message_message" placeholder="Message"
                                     required="required"
-                                    data-validation-required-message="Please enter your message"></textarea>
+                                    data-validation-required-message="Please enter your message"></textarea>  #}
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div>
                                 <button class="btn btn-outline-primary" type="submit" id="sendMessageButton">Envoyer message</button>
                             </div>
-                        </form>
+                        {{ form_end(formMessage) }}
+                        {# </form> #}
                     </div>
                 </div>
             </div>
@@ -270,5 +280,37 @@
         </p>
     </div>
 </div>
+<script src="{{ asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+<script type="text/javascript">
 
+    $(document).ready(function () {
+       $('#message').on('submit', function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let formData = new FormData(form[0]);
+          
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                   // blockPage();
+                },
+                complete: function (result) {
+                   //unblockPage();
+                },
+                success: function (response) {
+                    $('#success').replaceWith(response.fullGlobalRecapHtml);
+                    $('#success').css('display', 'block');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Gérer l'erreur (par exemple, afficher un message d'erreur)
+                    alert('Erreur lors de l\'envoie du message.');
+                },
+            });
+        });
+    });
+</script>
 {% endblock %}

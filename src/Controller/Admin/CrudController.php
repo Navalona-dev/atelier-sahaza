@@ -7,9 +7,12 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\ProductType;
 use App\Form\CategoryType;
+use App\Form\MessageType;
 use App\Form\TypeFormType;
 use App\Repository\CategoryRepository;
+use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
+use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -123,7 +126,7 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/delete/{id}", name="app_admin_delete", methods={"POST"})
      */
-    public function delete($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    public function delete($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository, MessageRepository $messageRepository, TypeRepository $typeRepository): Response
     {
         $menu = $request->get('menu');
         $entity = null;
@@ -133,6 +136,12 @@ class CrudController extends AbstractController
                 break;
             case 'produit':
                 $entity = $productRepository->find($id);
+                break;
+            case 'message':
+                $entity = $messageRepository->find($id);
+                break;
+            case 'type':
+                $entity = $typeRepository->find($id);
                 break;
             default:
                 # code...
@@ -153,7 +162,7 @@ class CrudController extends AbstractController
     /**
      * @Route("/data/update/{id}", name="app_admin_update", methods={"POST"})
      */
-    public function update($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    public function update($id, Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository, MessageRepository $messageRepository): Response
     {
         $menu = $request->get('menu');
 
@@ -213,6 +222,34 @@ class CrudController extends AbstractController
                 'menu' => $menu
             ]);
                break;
+            case 'message':
+            $message = $messageRepository->find($id);
+    
+            $form = $this->createForm(MessageType::class, $message);
+            
+            $form->handleRequest($request);
+
+            /*if ($form->isSubmitted() && $form->isValid()) {
+                $date = new \DateTime();
+                $category->setCreatedAt($date)
+                        ->setIsActive(1);
+                
+                $this->em->persist($category);
+                $this->em->flush();
+
+                if ($request->isXmlHttpRequest()) {
+                    return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                }
+
+                $this->addFlash('success', 'Categorie modifié avec succès');
+                return $this->redirectToRoute('app_admin_liste');
+            }*/
+            return $this->render('admin/liste/modal_message.html.twig', [
+                'form' => $form->createView(),
+                'id' => $request->get('id'),
+                'menu' => $menu
+            ]);
+            break;
             default:
                 # code...
                 break;

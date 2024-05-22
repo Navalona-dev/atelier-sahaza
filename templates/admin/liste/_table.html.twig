@@ -164,6 +164,30 @@
             </td>
         </tr>
     {% endif %}
+ {%  elseif menu == "message" %}
+      {% if type == "thead" %}
+        <tr class="text-nowrap" id="thead_{{menu}}">
+            <th>Identification</th>
+            <th>Date d'envoie</th>
+            <th>Nom</th>
+            <th>Objet</th>
+            <th>Message</th>
+            
+            <th>Actions</th>
+        </tr>
+    {% elseif type == "tbody" %}
+        <tr class="text-nowrap" id="tbody_{{menu}}">
+            <td> {{liste.id}} </td>
+            <td> {{liste.createdAt|date('d-m-Y H:s')}} </td>
+            <td> {{liste.nom}} </td>
+            <td> {{liste.objet}} </td>
+            <td> {{liste.message}} </td>
+            <td>
+                <a href="#" onclick="return openModalUpdateEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-eye-fill"></i></a>
+                <a href="#" onclick="return deleteEntity({{liste.id}}, '{{menu}}')"><i class="bi bi-trash text-danger"></i></a>
+            </td>
+        </tr>
+    {% endif %}  
 {% endif %}
 
 <script>
