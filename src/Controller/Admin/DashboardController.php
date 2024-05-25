@@ -2,11 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\AdminType;
+use App\Entity\PasswordUpdate;
+use App\Form\PasswordUpdateType;
 use App\Repository\TypeRepository;
+use App\Repository\AdminRepository;
 use App\Repository\ContactRepository;
-use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\MessageRepository;
+use App\Repository\ProductRepository;
+use Symfony\Component\Form\FormError;
+use App\Repository\CategoryRepository;
 use App\Repository\SocialLinkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DashboardController extends AbstractController
 {
@@ -23,6 +29,7 @@ class DashboardController extends AbstractController
     private $categoryRepository;
     private $typeRepository;
     private $messageRepository;
+    private $em;
 
     public function __construct(
         ContactRepository $contactRepo,
@@ -30,7 +37,8 @@ class DashboardController extends AbstractController
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
         TypeRepository $typeRepository,
-        MessageRepository   $messageRepository
+        MessageRepository   $messageRepository,
+        EntityManagerInterface $em
     )
     {
         $this->contactRepo = $contactRepo;
@@ -39,6 +47,7 @@ class DashboardController extends AbstractController
         $this->categoryRepository = $categoryRepository;
         $this->typeRepository = $typeRepository;
         $this->messageRepository = $messageRepository;
+        $this->em = $em;
     }
 
     /**
@@ -54,7 +63,10 @@ class DashboardController extends AbstractController
     /**
      * @Route("admin/liste", name="app_admin_liste")
      */
-    public function loadMenuContent(Request $request)
+    public function loadMenuContent(
+        Request $request,
+        UserPasswordHasherInterface $encoder
+        )
     {
         $menu = $request->get('menu');
 
@@ -78,7 +90,72 @@ class DashboardController extends AbstractController
 
         if(!$menu) {
             return $this->render('admin/dashboard/index.html.twig');
-        } else {
+        } elseif($menu == "profile") {
+            $admin = $this->getUser();
+
+            $form = $this->createForm(AdminType::class, $admin);
+            
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()) {
+                
+                $this->em->persist($admin);
+                $this->em->flush();
+
+                if ($request->isXmlHttpRequest()) {
+                    return new JsonResponse(['status' => 'success'], Response::HTTP_OK);
+                }
+
+                $this->addFlash('success', 'Profile modifié avec succès');
+                return $this->redirectToRoute('app_admin_liste');
+            }
+
+            $passwordUpdate = new PasswordUpdate();
+
+            $formPwd = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+            $formPwd->handleRequest($request);
+
+            $message = 'Votre mot de passe a bien été modifié! Vous pouvez maintenant vous connecter!';
+
+            $messageError = 'Le mot de passe que vous avez tapé n\'est pas votre mot de passe actuel!';
+
+            if ($formPwd->isSubmitted() && $formPwd->isValid()) {
+                $admin = $this->getUser();
+
+                $oldPassword = $form->get('oldPassword')->getData();
+
+                $passwordValid = $encoder->isPasswordValid($admin, $oldPassword);
+            
+                if ($passwordValid) {
+                    $newPassword = $passwordUpdate->getNewPassword();
+                    $password = $encoder->hashPassword($admin, $newPassword);
+            
+                    $admin->setPassword($password);
+            
+                    $em->persist($admin);
+                    $em->flush();
+            
+                    $this->addFlash(
+                        'success',
+                        $message
+                    );
+
+                    $tokenStorage->setToken(null);
+            
+                    return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+                } else {
+                    $form->get('oldPassword')->addError(new FormError($messageError));
+                }
+            }
+            $content = $this->renderView('admin/profile/index.html.twig', [
+                'form' => $form->createView(),
+                'menu' => $menu,
+                'formPwd' => $formPwd->createView()
+            ]);
+            return new JsonResponse($content);
+
+        }else {
 
             $content = $this->renderView('admin/liste/index.html.twig', [
                 'menu' => $menu,

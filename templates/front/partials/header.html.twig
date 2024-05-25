@@ -1,29 +1,28 @@
-<nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
-        <a href="{{path('app_home')}}" class="navbar-brand ml-lg-3">
-            <h1 class="m-0 display-5 fw-bold"><span class="text-primary">Atelier</span>Sahaza</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
-            <div class="navbar-nav m-auto py-0">
-                <a href="{{path('app_home')}}" class="nav-item nav-link active">Accueil</a>
-                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#about {% else %} #about {% endif %}" class="nav-item nav-link">A propos</a>
-                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#skills {% else %} #skills {% endif %}" class="nav-item nav-link">Compétence</a>
-                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="nav-item nav-link">Contact</a>
-                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#location {% else %} #location {% endif %}" class="nav-item nav-link">Siège</a>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle nav-item nav-link" data-bs-toggle="dropdown" aria-expanded="false">
-                      Produits
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#product {% else %} #product {% endif %}">Tous</a></li>
-                      <li><a class="dropdown-item" href="{{path('app_front_produit_allimunium')}}">Allimunium</a></li>
-                      <li><a class="dropdown-item" href="{{path('app_front_produit_metallique')}}">Métallique</a></li>
-                    </ul>
-                  </div>
-                <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#quality {% else %} #quality {% endif %}" class="nav-item nav-link">Qualités</a>
-            </div>
-            <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="btn btn-outline-primary d-none d-lg-block">Contactez-nous</a>
+<nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5 header" id="navbar">
+  <a href="{{path('app_home')}}" class="navbar-brand ml-lg-3">
+      <h1 class="m-0 display-5 fw-bold"><span class="text-primary">Atelier</span>Sahaza</h1>
+  </a>
+  <i class="bi bi-list mobile-nav-toggle fs-1"></i>
+  <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
+      <div class="navbar-nav m-auto py-0">
+          <a href="{{path('app_home')}}" class="nav-item nav-link active">Accueil</a>
+          <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#about {% else %} #about {% endif %}" class="nav-item nav-link">A propos</a>
+          <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#skills {% else %} #skills {% endif %}" class="nav-item nav-link">Compétence</a>
+          <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="nav-item nav-link">Contact</a>
+          <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#location {% else %} #location {% endif %}" class="nav-item nav-link">Siège</a>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle nav-item nav-link" id="dropdownMenuLink" aria-expanded="false">
+                Produits
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#product {% else %} #product {% endif %}">Tous</a></li>
+                <li><a class="dropdown-item" href="{{path('app_front_produit_allimunium')}}">Allimunium</a></li>
+                <li><a class="dropdown-item" href="{{path('app_front_produit_metallique')}}">Métallique</a></li>
+            </ul>
         </div>
-    </nav>
+        
+          <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#quality {% else %} #quality {% endif %}" class="nav-item nav-link">Qualités</a>
+      </div>
+      <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="btn btn-outline-primary d-none d-lg-block">Contactez-nous</a>
+  </div>
+</nav>

@@ -8,10 +8,47 @@
             </div>
             <div class="modal-body">
                 {{ form_start(form, {'attr': {'id': 'updateData', 'action': path('app_admin_update', {'id': id}) }}) }}
-                    <div class="form-group mb-3">
-                        <label for="" class="mb-2">Nom du categorie</label>
-                        {{ form_widget(form.name) }}
-                    </div>
+                    {% if menu == "categorie" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du categorie</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+                    {% elseif menu == "contact" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du contact</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Numéro téléphone</label>
+                            {{ form_widget(form.contact) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Adresse e-mail</label>
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Adresse exacte</label>
+                            {{ form_widget(form.adresse) }}
+                        </div>
+                    {% elseif menu == "social" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du réseau sociaux</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Url exacte</label>
+                            {{ form_widget(form.link) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Icône</label>
+                            {{ form_widget(form.icon) }}
+                        </div>
+                    {% elseif menu == "type" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom de type de produit</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+                    {% endif %}
                     <input type="hidden" name="menu" value="{{menu}}">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-sm px-3">Modifier</button>

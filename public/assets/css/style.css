@@ -49,7 +49,7 @@
   #HEADER
   ----------------------------------*/
 
-  .navbar {
+  .header {
     height: 13vh;
   }
 
@@ -290,4 +290,156 @@
   border-radius: 100%;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.mobile-nav-toggle {
+  display: none;
+}
+
+.product-list-menu a {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.menu-link.active {
+  background-color: var(--bg-color);
+  color: #fff !important;
+  padding: 2px 20px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 750px) {
+  .navbar {
+    display: block !important;
+  }
+
+  .home-img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+
+  .content-img {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .home .text-stroke {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .typed-text {
+    text-align: center !important;
+    margin-top: -2rem !important;
+  }
+
+  .text-us {
+    text-align: center;
+  }
+
+  .btn-about {
+    padding: 5px 20px !important;
+    font-size: 16px !important;
+  }
+
+  .text-stroke-about, .quality-text-strok, .product-text-strok, .contact-text-strok, .siege-text-strok {
+    font-size: 60px !important;
+  }
+
+  .skill-text-strok {
+    font-size: 55px !important;
+  }
+
+  .title {
+    font-size: 30px !important;
+  }
+
+  .header {
+    height: 9vh !important;
+  }
+
+  .navbar h1 {
+    font-size: 25px !important;
+    margin-left: 20px !important;
+  }
+
+  .navbar .nav-link {
+    margin-left: 20px !important;
+  }
+
+  .home {
+    height: 90vh !important;
+  }
+
+  .home-video {
+    display: none !important;
+  }
+  
+  .product-detail .detail {
+    margin-top: 20px !important;
+    margin-left: 0 !important;
+  }
+
+  .btn-contact {
+    width: 100% !important;
+  }
+ 
+}
+
+@media screen and (min-width: 400px) and (max-width: 750px) {
+  .mobile-nav-toggle {
+    margin-left: 350px !important;
+    margin-top: -4rem !important;
+    position: absolute;
+    cursor: pointer;
+    display: block !important;
+  }
+}
+
+@media screen and (width: 360px) {
+  .mobile-nav-toggle {
+    margin-left: 300px !important;
+    margin-top: -4rem !important;
+    position: absolute;
+    cursor: pointer;
+    display: block !important;
+  }
+
+  .title {
+    text-align: center;
+  }
+}
+
+@media screen and (width: 600px) {
+  .mobile-nav-toggle {
+    margin-left: 500px !important;
+    margin-top: -4rem !important;
+    position: absolute;
+    cursor: pointer;
+    display: block !important;
+  }
+}
+
+@media screen and (width: 800px) {
+  .mobile-nav-toggle {
+    margin-left: 550px !important;
+    margin-top: -5rem !important;
+    position: absolute;
+    cursor: pointer;
+    display: block !important;
+  }
+
+  .navbar{
+    display: block !important;
+  }
+
+  .header {
+    height: 7vh !important;
+  }
+
+  .home-video {
+    margin-left: 0 !important;
+
+  }
 }

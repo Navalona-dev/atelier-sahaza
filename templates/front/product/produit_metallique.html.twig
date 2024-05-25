@@ -44,20 +44,25 @@
     <div class="container">
         <h1 class="text-center fw-bold mb-3"> {{product.title}} </h1>
         <p class="text-center mb-5"> {{product.description|raw}} </p>
+        <div class="product-list-menu d-flex flex-wrap justify-content-center mb-5">
+            <a href="#" class="text-decoration-none text-black menu-link active" data-category="all">Tous</a>
+            {% for category in categories %}
+                <a href="#" class="text-decoration-none text-black menu-link" data-category="{{ category.id }}"> {{ category.name }} </a>
+            {% endfor %}
+        </div>
         <div class="row product-container">
             {% for produit in products %}
-            <div class="col-lg-4 col-md-6 mb-4 product-item first">
-                <div class="position-relative overflow-hidden mb-2">
-                    <img class="img-fluid rounded w-100" src="{{ asset('uploads/products/' ~ produit.image) }}" alt="">
-                    <div class="product-btn bg-primary d-flex align-items-center justify-content-center">
-                        <a href="{{path('app_front_produit', {'id' : produit.id})}}" data-lightbox="gallery">
-                            <i class="fa fa-plus text-white" style="font-size: 60px;"></i>
-                        </a>
+                <div class="col-lg-4 col-md-6 mb-4 product-item" data-category="{{ produit.category.id }}">
+                    <div class="position-relative overflow-hidden mb-2">
+                        <img class="img-fluid rounded w-100" src="{{ asset('uploads/products/' ~ produit.image) }}" alt="">
+                        <div class="product-btn bg-primary d-flex align-items-center justify-content-center">
+                            <a href="{{path('app_front_produit', {'id' : produit.id})}}" data-lightbox="gallery">
+                                <i class="fa fa-plus text-white" style="font-size: 60px;"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
-            
         </div>
     </div>
 </section>

@@ -49,7 +49,7 @@
                             {{form_widget(form.category)}}
                         </div>
                         <div class="form-group mb-3">
-                            <label for="" class="mb-2">TYpe</label>
+                            <label for="" class="mb-2">Type</label>
                             {{form_widget(form.type)}}
                         </div>
                         <div class="form-group mb-3">
@@ -63,6 +63,20 @@
                         <div class="form-group mb-3">
                             <label for="" class="mb-2">Image</label>
                             {{form_widget(form.imageFile)}}
+                        </div>
+
+                    {% elseif menu == "social" %}
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Nom du réseau sociaux</label>
+                            {{ form_widget(form.name) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Url exacte</label>
+                            {{ form_widget(form.link) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="mb-2">Icône</label>
+                            {{ form_widget(form.icon) }}
                         </div>
                     {% endif %}
 

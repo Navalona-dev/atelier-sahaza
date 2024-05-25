@@ -53,7 +53,11 @@ class HomeController extends AbstractController
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
         $contacts = $this->contactRepository->findBy(['isActive' => true]);
         $qualities = $this->qualityRepository->findBy(['isActive' => true]);
-        $produits = $this->productRepository->findBy(['isActive' => true]);
+        $produits = $this->productRepository->findBy(
+            ['isActive' => true], 
+            ['createdAt' => 'DESC'], 
+            6 
+        );
 
         $homePages = $this->homePageRepository->findAll();
 

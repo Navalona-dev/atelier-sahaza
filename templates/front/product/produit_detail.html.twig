@@ -64,7 +64,7 @@
                     <p><strong>Catégorie : </strong> {{produit.category.name}} </p>
                     <hr>
                     <p class="description"> {{produit.description|raw}} </p>
-                    <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="btn btn-primary px-5 btn-sm mt-4">Envoyer un message</a>
+                    <a href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}" class="btn btn-primary px-5 btn-sm mt-4 btn-contact">Envoyer un message</a>
                 </div>
             </div>
         </div>

@@ -1,21 +1,22 @@
 <div class="container-fluid bg-primary text-white mt-5 py-5 px-sm-3 px-md-5 footer" id="footer">
     <div class="container text-center py-5">
-        <div class="d-flex justify-content-center mb-4">
+        <div class="d-flex flex-wrap justify-content-center mb-4">
             {% for socialLink in socialLinks %}
                 <a class="btn btn-light btn-social mr-2" href="{{socialLink.link}}"><i class="{{socialLink.icon}}"></i></a>
             {% endfor %}
         </div>
-        <div class="d-flex justify-content-center mb-3">
-            <a class="text-white text-decoration-none" href="{{path('app_home')}}">Accueil</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#about {% else %} #about {% endif %}">A propos</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#skills {% else %} #skills {% endif %}">Compétence</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#contact {% else %} #contact {% endif %}">Contact</a>
-            <span class="px-3">|</span>
-            <a class="text-white text-decoration-none" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{path('app_home')}}#quality {% else %} #quality {% endif %}">Qualité</a>
+        <div class="d-flex flex-wrap justify-content-center mb-3">
+            <a class="text-white text-decoration-none mb-2" href="{{ path('app_home') }}">Accueil</a>
+            <span class="px-3 mb-2">|</span>
+            <a class="text-white text-decoration-none mb-2" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{ path('app_home') }}#about {% else %} #about {% endif %}">A propos</a>
+            <span class="px-3 mb-2">|</span>
+            <a class="text-white text-decoration-none mb-2" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{ path('app_home') }}#skills {% else %} #skills {% endif %}">Compétence</a>
+            <span class="px-3 mb-2">|</span>
+            <a class="text-white text-decoration-none mb-2" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{ path('app_home') }}#contact {% else %} #contact {% endif %}">Contact</a>
+            <span class="px-3 mb-2">|</span>
+            <a class="text-white text-decoration-none mb-2" href="{% if app.request.attributes.get('_route') != 'app_home' %} {{ path('app_home') }}#quality {% else %} #quality {% endif %}">Qualité</a>
         </div>
+        
         <p class="m-0">
             Notre objectif chez Atelier Sahaza est de fournir des solutions de construction métallique de haute qualité qui répondent aux besoins uniques de nos clients. Nous nous engageons à offrir un travail artisanal exceptionnel, une expertise technique et un service clientèle de premier ordre. Merci d'avoir visité notre site !
         </p>

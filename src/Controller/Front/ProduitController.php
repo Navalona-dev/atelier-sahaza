@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\HomePageRepository;
 use App\Repository\SocialLinkRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,17 +15,20 @@ class ProduitController extends AbstractController
     private $productRepo;
     private $homePageRepository;
     private $socialLinkRepository;
+    private $categoryRepo;
 
     public function __construct (
         ProductRepository $productRepo,
         HomePageRepository $homePageRepository,
-        SocialLinkRepository $socialLinkRepository
+        SocialLinkRepository $socialLinkRepository,
+        CategoryRepository $categoryRepo
 
     )
     {
         $this->productRepo = $productRepo;
         $this->homePageRepository = $homePageRepository;
         $this->socialLinkRepository = $socialLinkRepository;
+        $this->categoryRepo = $categoryRepo;
 
     }
     /**
@@ -38,10 +42,16 @@ class ProduitController extends AbstractController
 
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
 
+        $categories = $this->categoryRepo->findBy(
+            ['isActive' => true],
+            ['name' => 'ASC']
+        );
+
         return $this->render('front/product/produit_metallique.html.twig', [
             'products' => $products,
             'homePages' => $homePages,
             'socialLinks' => $socialLinks,
+            'categories' => $categories
 
         ]);
     }
@@ -57,10 +67,16 @@ class ProduitController extends AbstractController
 
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
 
+        $categories = $this->categoryRepo->findBy(
+            ['isActive' => true],
+            ['name' => 'ASC']
+        );
+
         return $this->render('front/product/produit_allimunium.html.twig', [
             'products' => $products,
             'homePages' => $homePages,
             'socialLinks' => $socialLinks,
+            'categories' => $categories
 
         ]);
     }
@@ -73,7 +89,7 @@ class ProduitController extends AbstractController
      {
         $homePages = $this->homePageRepository->findAll();
 
-         $product = $this->productRepo->find($id);
+        $product = $this->productRepo->find($id);
 
         $socialLinks = $this->socialLinkRepository->findBy(['isActive' => true]);
 
