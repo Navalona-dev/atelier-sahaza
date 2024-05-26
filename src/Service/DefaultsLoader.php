@@ -54,9 +54,9 @@ class DefaultsLoader
         $this->socialLinks();
         $this->homePages();
         $this->qualites();
-        $this->categories();
+        /*$this->categories();
         $this->types();
-        $this->produits();
+        $this->produits();*/
         
     }
 
@@ -162,7 +162,7 @@ class DefaultsLoader
         }
     }
 
-    public function categories() {
+    /*public function categories() {
         $categories = Yaml::parseFile('defaults/data/category.yaml');
 
         foreach ($categories as $label => $content) {
@@ -240,7 +240,7 @@ class DefaultsLoader
             }
             
         }
-    }
+    }*/
 
 
     public function copyFiles()
