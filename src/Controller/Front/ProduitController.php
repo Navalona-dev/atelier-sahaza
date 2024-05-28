@@ -6,6 +6,8 @@ use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\HomePageRepository;
 use App\Repository\SocialLinkRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +18,15 @@ class ProduitController extends AbstractController
     private $homePageRepository;
     private $socialLinkRepository;
     private $categoryRepo;
+    private $paginator;
+
 
     public function __construct (
         ProductRepository $productRepo,
         HomePageRepository $homePageRepository,
         SocialLinkRepository $socialLinkRepository,
-        CategoryRepository $categoryRepo
+        CategoryRepository $categoryRepo,
+        PaginatorInterface $paginator
 
     )
     {
@@ -29,12 +34,13 @@ class ProduitController extends AbstractController
         $this->homePageRepository = $homePageRepository;
         $this->socialLinkRepository = $socialLinkRepository;
         $this->categoryRepo = $categoryRepo;
+        $this->paginator = $paginator;
 
     }
     /**
      * @Route("/produit/metallique", name="app_front_produit_metallique")
      */
-    public function produitMetallique(): Response
+    public function produitMetallique(Request $request): Response
     {
         $homePages = $this->homePageRepository->findAll();
 
@@ -47,8 +53,15 @@ class ProduitController extends AbstractController
             ['name' => 'ASC']
         );
 
+        $produits = $this->paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            2
+        );
+        
+
         return $this->render('front/product/produit_metallique.html.twig', [
-            'products' => $products,
+            'products' => $produits,
             'homePages' => $homePages,
             'socialLinks' => $socialLinks,
             'categories' => $categories
@@ -59,7 +72,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/allimunium", name="app_front_produit_allimunium")
      */
-    public function produitAllimunium(): Response
+    public function produitAllimunium(Request $request): Response
     {
         $homePages = $this->homePageRepository->findAll();
 
@@ -72,8 +85,14 @@ class ProduitController extends AbstractController
             ['name' => 'ASC']
         );
 
+        $produits = $this->paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            2
+        );
+
         return $this->render('front/product/produit_allimunium.html.twig', [
-            'products' => $products,
+            'products' => $produits,
             'homePages' => $homePages,
             'socialLinks' => $socialLinks,
             'categories' => $categories

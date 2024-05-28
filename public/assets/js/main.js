@@ -77,7 +77,7 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     // Vérifiez si l'URL de la page se termine par "index.html" ou si vous pouvez identifier la classe ou l'ID unique de la page d'accueil
     if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
         // Si la condition est vraie, exécutez le code jQuery uniquement sur la page d'accueil
@@ -91,7 +91,7 @@ $(document).ready(function() {
             }
         });
     }
-});
+});*/
 
 
 //section about

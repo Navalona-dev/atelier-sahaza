@@ -28,6 +28,32 @@
             margin-top: 150px;
             margin-bottom: 100px;
         }
+
+        .last, .first {
+            display: none;
+        }
+
+        .pagination a {
+            text-decoration: none;
+        }
+
+       
+
+        .pagination .page, .pagination .previous, .pagination .next {
+            background-color: #272727;
+            padding: 5px 12px;
+            border-right: 1px solid #000;
+        }
+
+        .pagination .page a, .pagination .previous a, .pagination .next a {
+            color: #fff;
+        }
+
+        .pagination .current {
+            background-color: #4682B4;
+            padding: 5px 12px;
+            color: #fff;
+        }
     </style>
 
 {% endblock %}
@@ -63,6 +89,9 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="navigation d-flex justify-content-center">
+            {{ knp_pagination_render(products) }}
         </div>
     </div>
 </section>

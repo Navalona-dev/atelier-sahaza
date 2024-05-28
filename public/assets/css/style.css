@@ -68,6 +68,10 @@
     
   }
 
+  #home .text-us {
+    margin-top: 50px !important;
+  }
+
   #home .btn-outline-light:hover {
     border-color: #fff !important;
     color: var(--text-color) !important;
@@ -334,8 +338,9 @@
     margin-top: -2rem !important;
   }
 
-  .text-us {
+  #home .text-us {
     text-align: center;
+    margin-top: 20px !important;
   }
 
   .btn-about {
